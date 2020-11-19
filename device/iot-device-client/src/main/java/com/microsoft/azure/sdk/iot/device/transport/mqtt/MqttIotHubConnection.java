@@ -4,6 +4,7 @@
 package com.microsoft.azure.sdk.iot.device.transport.mqtt;
 
 import com.microsoft.azure.sdk.iot.device.*;
+import com.microsoft.azure.sdk.iot.device.auth.IotHubSasToken;
 import com.microsoft.azure.sdk.iot.device.exceptions.TransportException;
 import com.microsoft.azure.sdk.iot.device.transport.*;
 import lombok.extern.slf4j.Slf4j;
@@ -129,7 +130,7 @@ public class MqttIotHubConnection implements IotHubTransportConnection, MqttMess
                 if (this.config.getAuthenticationType() == DeviceClientConfig.AuthType.SAS_TOKEN)
                 {
                     this.log.trace("MQTT connection will use sas token based auth");
-                    this.iotHubUserPassword = this.config.getSasTokenAuthentication().getRenewedSasToken(false, false);
+                    this.iotHubUserPassword = this.config.getSasTokenAuthentication().getRenewedSasToken();
                     this.webSocketQueryString = NO_CLIENT_CERT_QUERY_STRING;
                 }
                 else if (this.config.getAuthenticationType() == DeviceClientConfig.AuthType.X509_CERTIFICATE)
